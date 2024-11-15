@@ -1,74 +1,417 @@
 <html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShopElectro - Electronics Store</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
+    <style>
+   .menu {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+   .btn-main-img-cont {
+    margin-left: 0 !important;
+    align-self: flex-start !important; /* Overrides alignment within flex containers */
+    text-align:  !important; /* Ensures the text inside aligns left */
+    float: left; /* Aligns the element to the left within its container */
+}
+
+
+    
+    * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Sticky Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: #111;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .header a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            margin: 0 15px;
+        }
+
+        .header a:hover {
+            text-decoration: underline;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 25px;
+            margin-right: 10px;
+        }
+
+        .header .menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .get-launcher {
+            background-color: #ffbb00;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .get-launcher:hover {
+            background-color: #ffcc33;
+        }
+
+        /* Main Content */
+        .container {
+            padding: 50px;
+            flex-grow: 1;
+        }
+
+        .title {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        /* Newswire Cards */
+        .news-grid {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .news-card {
+            background-color: #1a1a1a;
+            border-radius: 10px;
+            overflow: hidden;
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .news-card:hover {
+            transform: scale(1.05);
+        }
+
+        .news-card img {
+            width: 100%;
+            height: auto;
+        }
+
+        .news-card-content {
+            padding: 15px;
+        }
+
+        .news-card-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .news-card-meta {
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        /* Featured Games Section */
+        .featured-games {
+            padding: 50px;
+            text-align: center;
+            background-color: #000;
+            color: #fff;
+        }
+
+        .featured-title {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .main-banner {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+        }
+
+        .main-banner img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .game-thumbnails {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .game-card {
+            width: 100%;
+            max-width: 150px;
+            transition: transform 0.3s;
+        }
+
+        .game-card img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .game-card:hover {
+            transform: scale(1.05);
+        }
+
+        .view-more {
+            margin-top: 20px;
+        }
+
+        .view-more a {
+            color: #ffbb00;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .view-more a:hover {
+            color: #ffcc33;
+        }
+
+        /* Detailed Footer */
+        .detailed-footer {
+            background-color: #000;
+            color: #fff;
+            padding: 30px 50px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .detailed-footer a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 14px;
+        }
+
+        .detailed-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-top,
+        .footer-middle,
+        .footer-bottom {
+            margin-bottom: 20px;
+        }
+
+        .footer-top a {
+            margin: 0 15px;
+        }
+
+        .footer-middle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .footer-language {
+            font-size: 14px;
+        }
+
+        .footer-bottom {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .footer-social a img {
+            width: 24px;
+            height: 24px;
+            filter: invert(100%);
+        }
+
+        .footer-info p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+    </style><title>Under Construction</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .content-left {
+            flex: 2;
+            position: relative;
+        }
+
+        .content-left img {
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        .content-right {
+            flex: 1;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .content-right h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .content-right button {
+background-color: transparent;
+            color: #FFF;
+            border-color: #FFF;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 245.31px;
+            height: 62.22px;
+        }
+
+        .content-right button:hover {
+            background-color: #FFF;
+            color: #000;
+            border-color: #000;
+        }
+
+        .footer {
+            background-color: #111;
+            padding: 10px;
+            text-align: center;
+            font-size: 14px;
+        }
+    </style><link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://contentltd.net/json/cnt/oembed.json">
+<script>(function(w,d){{(function(w,d){zaraz.__zarazMCListeners={"google-analytics_v4_OVCU":["visibilityChange"],"google-analytics_v4_rocc":["visibilityChange"]};})(window,document);}})(window,document)</script><script>(function(w,d){{(function(w,d){zaraz.__zarazMCListeners={"google-analytics_v4_OVCU":["visibilityChange"],"google-analytics_v4_rocc":["visibilityChange"]};})(window,document);}})(window,document)</script><script>(function(w,d){{(function(w,d){zaraz.__zarazMCListeners={"google-analytics_v4_OVCU":["visibilityChange"],"google-analytics_v4_rocc":["visibilityChange"]};})(window,document);}})(window,document)</script><script>(function(w,d){{(function(w,d){zaraz.__zarazMCListeners={"google-analytics_v4_OVCU":["visibilityChange"],"google-analytics_v4_rocc":["visibilityChange"]};})(window,document);}})(window,document)</script></head>
 <body>
 
     <!-- Header -->
-    <header>
-        <div class="logo">
-            <h1>HigmarkHealth</h1>
-        </div>
-        <div class="search-bar">
-            <input type="text" placeholder="Search for products...">
-            <button>Search</button>
-        </div>
-        <div class="user-nav">
-            <a href="#">Sign In</a>
-            <a href="#">Cart (0)</a>
-        </div>
+    <header class="header">
+        <a href="https://contentltd.net"><div class="logo" style="align-item: center;">
+            <img src="https://yt3.googleusercontent.com/fm3EfAme--1R-AXyYk9fhrEFybJOB_tqX_hQ7jNDazZR3tpevPTX1JINsk6DlDFplngz67Xz=s176-c-k-c0x00ffffff-no-rj" alt="ContentLTD Logo"></div></a>
+        
+        
     </header>
 
-    <!-- Main Navigation -->
-    <nav>
-        <ul>
-            <li><a href="#">Laptops</a></li>
-            <li><a href="#">Smartphones</a></li>
-            <li><a href="#">TVs</a></li>
-            <li><a href="#">Headphones</a></li>
-            <li><a href="#">Cameras</a></li>
-            <li><a href="#">Gaming</a></li>
-        </ul>
-    </nav>
-
     <!-- Main Content -->
-    <main>
-        <section class="product-list">
-            <div class="product">
-                <img src="https://sp.yimg.com/ib/th?id=OPHS.tuju%2f%2fDu2zg25g474C474&amp;o=5&amp;pid=21.1&amp;w=174&amp;h=174" alt="Smartphone">
-                <h3>iphone 16 pro</h3>
-                <p>$699.99</p>
-                <button class="add-to-cart">Add to Cart</button>
+                        
+
+    <div class="container">
+    <div class="container" style="width: 1207.78px; height: 475.56px;">
+        <!-- Left Content -->
+        
+
+        <!-- Right Content -->
+        <div class="content-right">
+            <h2 style="font-size: 2rem; text-align: left;">This site is in Progress</h2>
+            
+            
+        <p style=" font-size: 0.75rem; text-align: left;">This site is still being planned and built. In the mean time you can check out my friend! </p><a href="https://contentltd.net" style="color: white;"> <p style=" font-size: 0.75rem; text-align: left;">My Friend</p></a></div>
+    </div></div><div style="background: #1d1d1d;">'<h1 class="title">Newswire</h1><div class="container">
+        
+        <div class="news-grid">
+            <!-- News Card 1 -->
+             <p>No Articles, Check back later</p><!-- <div class="news-card">
+                
+                <div class="news-card-content">
+                    <div class="news-card-title">THIS RHYTHM (feat. Rahh) - PROSPA</div>
+                    <div class="news-card-meta">Rockstar Games | November 8, 2024</div>
+                </div>
+            </div>-->
+            <!-- News Card 2 -->
+            
+            
+            
+        </div>
+    </div><!-- Featured Games Section -->
+    <!--<div class="featured-games">
+        <h2 class="featured-title">Featured Games</h2>
+        <div class="main-banner">
+            <img src="banner-image.png" alt="GTA VI Coming Soon">
+        </div>
+        <div class="game-thumbnails">
+            <div class="game-card">
+                <img src="game1.png" alt="Grand Theft Auto V">
             </div>
-            <div class="product">
-                <img src="https://sp.yimg.com/ib/th?id=OPHS.OnvI0V%2fcKqk%2btw474C474&amp;o=5&amp;pid=21.1&amp;w=174&amp;h=174" alt="Laptop">
-                <h3>Macbook M4</h3>
-                <p>$999.99</p>
-                <button class="add-to-cart">Add to Cart</button>
+            <div class="game-card">
+                <img src="game2.png" alt="Grand Theft Auto Online">
             </div>
-            <div class="product">
-                <img src="https://tse3.mm.bing.net/th?id=OIP.V9t9_HO40iYU9_cP2ONUuwHaHa&amp;pid=Api&amp;P=0&amp;h=180" alt="Headphones">
-                <h3>Airpods Max Bundle</h3>
-                <p>$129.99</p>
-                <button class="add-to-cart">Add to Cart</button>
+            <div class="game-card">
+                <img src="game3.png" alt="Red Dead Redemption II">
             </div>
-        </section>
-    </main>
+            <div class="game-card">
+                <img src="game4.png" alt="Red Dead Redemption">
+            </div>
+        </div>
+        <div class="view-more">
+            <a href="#">View More</a>
+        </div>
+    </div>-->
 
     <!-- Footer -->
-    <footer>
-        <div class="footer-links">
-            <a href="#">About Us</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Contact</a>
-        </div>
-        <p>© 2024 ShopElectro. All rights reserved.</p>
-    </footer>
-
-    <script src="script.js"></script>
+        <div class="footer">
+        <p>© ContentLTD | All Rights Reserved</p>
+    </div>
 
 
+
+</div>
 </body></html>
